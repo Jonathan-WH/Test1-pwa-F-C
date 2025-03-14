@@ -58,3 +58,9 @@ Angular CLI does not come with an end-to-end testing framework by default. You c
 
 For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
 # Test1-pwa-F-C
+
+Objective: Develop a Progressive Web App (PWA) using Angular, Ionic, and Firebase. Requirements:
+Implement a login system using Firebase Authentication.
+Develop a dashboard where users can add and view data stored in Firebase Firestore.
+Ensure a responsive design using Ionic.
+You are expected to design the UI and provide the necessary assets.
