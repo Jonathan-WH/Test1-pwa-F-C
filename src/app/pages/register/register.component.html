@@ -1,0 +1,79 @@
+<ion-content class="ion-padding">
+  <div class="logo">
+    <img (click)="navigateTo('')" src="/assets/fc.svg" alt="">
+  </div>
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title class="black roboto-condensed-extrabold
+">Inscription</ion-card-title>
+    </ion-card-header>
+
+    <ion-card-content>
+      <form [formGroup]="registerForm" (ngSubmit)="onRegister()">
+        
+        <!-- Email -->
+        <ion-item class="first" lines="none">
+          <ion-label position="floating" class="roboto-condensed-medium">Email:</ion-label>
+          <ion-input [clearInput]="true" (keydown)="blockSpace($event)" (paste)="removeSpacesOnPaste($event, 'email')" type="email" formControlName="email"></ion-input>
+           <ion-text color="danger" *ngIf="registerForm.get('email')?.invalid && registerForm.get('email')?.touched">
+          <p>
+            Un mail valide est requis.
+          </p>
+        </ion-text>
+        </ion-item>
+       
+
+        <!-- Username -->
+        <ion-item lines="none">
+          <ion-label position="floating" class="roboto-condensed-medium">Nom d'utilisateur:</ion-label>
+          <ion-input [clearInput]="true" (keydown)="blockSpace($event)" (paste)="removeSpacesOnPaste($event, 'email')" type="text" formControlName="username"></ion-input>
+           <ion-text color="danger" *ngIf="registerForm.get('username')?.invalid && registerForm.get('username')?.touched">
+          <p *ngIf="registerForm.get('username')?.errors?.['required']">Le nom d'utilisateur est obligatoire.</p>
+          <p *ngIf="registerForm.get('username')?.errors?.['minlength']">Le nom d'utilisateur dois contenir au moins 8 caractères.</p>
+        </ion-text>
+        </ion-item>
+       
+
+        <!-- Password -->
+        <ion-item lines="none">
+          <ion-label position="floating" class="roboto-condensed-medium">Mot de passe:</ion-label>
+          <ion-input [clearInput]="true" (keydown)="blockSpace($event)" (paste)="removeSpacesOnPaste($event, 'email')" type="password" formControlName="password"><ion-input-password-toggle slot="end" color="dark"></ion-input-password-toggle></ion-input>
+           <ion-text color="danger" *ngIf="registerForm.controls['password'].invalid && registerForm.controls['password'].touched">
+          <p *ngIf="registerForm.controls['password'].errors?.['required']">Le mot de passe est requis</p>
+          <p *ngIf="registerForm.controls['password'].errors?.['minlength']">Le mot de passe dois contenir au moins 8 caractères</p>
+          <p *ngIf="registerForm.controls['password'].errors?.['pattern']">
+            Le mot de passe dois contenir au moins 1 lettre majuscule, 1 lettre minuscule, 1 chiffre et 1 caractère spécial.
+          </p>
+        </ion-text>
+        </ion-item>
+       
+
+        <!-- Confirm Password -->
+        <ion-item class="last" lines="none">
+          <ion-label position="floating" class="roboto-condensed-medium">Confirmer le mot de passe:</ion-label>
+          <ion-input [clearInput]="true" type="password" formControlName="confirmPassword" (keydown)="blockSpace($event)" (paste)="removeSpacesOnPaste($event, 'email')"><ion-input-password-toggle  color="dark" slot="end"></ion-input-password-toggle></ion-input>
+          <ion-text color="danger" *ngIf="registerForm.hasError('passwordMismatch')">
+            <p>
+              Les mots de passe ne correspondent pas.
+            </p>
+          </ion-text>
+        </ion-item>
+        
+
+        <!-- Submit Button -->
+        <ion-button expand="block" type="submit" [disabled]="registerForm.invalid" class="roboto-condensed-bold">
+          S'inscrire
+        </ion-button>
+        <ion-text class="error-login"  color="danger" *ngIf="errorMessage">
+          <p>{{ errorMessage }}</p>
+        </ion-text>
+        <div class="account-button-container">
+
+                  <ion-text (click)="navigateTo('/login')" class="account-button">Vous avez déja un compte ?</ion-text>
+        </div>
+
+        
+      </form>
+    </ion-card-content>
+  </ion-card>
+</ion-content>

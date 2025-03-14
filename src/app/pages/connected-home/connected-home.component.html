@@ -1,0 +1,113 @@
+
+<ion-header class="grey-background" *ngIf="isAuthenticated$ | async">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button contentId="main-content" menu="menuId"></ion-menu-button>
+    </ion-buttons>
+    <ion-title class="roboto-condensed-medium">Dashboard</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+   
+
+<!-- 🔹 CONTENU PRINCIPAL -->
+<ion-content class="ion-padding" fullscreen="true" >
+ 
+
+  
+
+    <div class="header-card">
+      <ion-card class="full-width fade-in">
+      <ion-card-header>
+        <ion-card-title class="roboto-condensed-extrabold">{{ currentDate }}</ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
+        <p *ngIf="username$ | async as username" class="roboto-condensed-medium">
+          Bienvenue <strong class="roboto-condensed-extrabold">{{ username }}</strong>, quelles sont vos idées aujourd’hui ?
+        </p>
+      </ion-card-content>
+    </ion-card>
+
+        <!-- 🔹 Carte Horloge du Monde -->
+        <ion-card class="fade-in  white">
+          <ion-card-content>
+            <ion-grid>
+              <ion-row>
+                <ion-col size="4" *ngFor="let city of worldClock$ | async; trackBy: trackByCity">
+                  <div class="clock-container">
+                    <div class="clock">
+                      <div class="hand hour-hand" [style.transform]="'rotate(' + city.hourAngle + 'deg)'"></div>
+                      <div class="hand minute-hand" [style.transform]="'rotate(' + city.minuteAngle + 'deg)'"></div>
+                      <div class="hand second-hand" [style.transform]="'rotate(' + city.secondAngle + 'deg)'"></div>
+                      <div class="center-dot"></div>
+                    </div>
+                    <ion-label class="clock-label roboto-condensed-medium">
+                      <strong>{{ city.name }}</strong>
+                    </ion-label>
+                    <ion-text class="roboto-condensed-bold">{{ city.digitalTime }}</ion-text>
+                  </div>
+                </ion-col>
+              </ion-row>
+            </ion-grid>
+          </ion-card-content>
+        </ion-card>
+    </div>
+    <!-- 🔹 Carte Bienvenue -->
+    
+    <div class="container-idea">
+
+      <ion-card class="fade-in">
+      <ion-card-header class="border-bottom">
+        <ion-card-title class="roboto-condensed-extrabold">Ajouter une idée</ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
+        <form [formGroup]="ideaForm" (ngSubmit)="addIdea()">
+          <ion-item class="first white" >
+            <ion-label class="roboto-condensed-medium" position="floating">Titre:</ion-label>
+            <ion-input formControlName="title"></ion-input>
+          </ion-item>
+          <ion-item class="last white" lines="none">
+            <ion-label class="roboto-condensed-medium" position="floating">Contenu:</ion-label>
+            <ion-textarea formControlName="content"></ion-textarea>
+          </ion-item>
+          <ion-button class="add-idea" expand="block" type="submit" [disabled]="ideaForm.invalid">Ajouter</ion-button>
+        </form>
+      </ion-card-content>
+    </ion-card>
+
+    <!-- 🔹 Carte Liste des Idées -->
+    <ion-card class="fade-in">
+      <ion-card-header>
+        <ion-card-title class="roboto-condensed-extrabold">Vos Idées</ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
+        <ion-list>
+          <ion-item 
+            class="white load-idea" 
+            *ngFor="let idea of ideas; let first = first; let last = last"
+            [ngClass]="{'first': first, 'last': last}"
+            [attr.lines]="last ? 'none' : ''">
+            
+            <ion-label>
+              <h2 class="roboto-condensed-medium">{{ idea.title }}</h2>
+              <p class="roboto-condensed-medium">{{ idea.content }}</p>
+              <small class="roboto-condensed-medium">{{ idea.date | date:'MMM d, y HH:mm' }}</small>
+            </ion-label>
+        
+            <ion-buttons slot="end">
+              <ion-button fill="clear" color="danger" (click)="confirmDeleteIdea(idea.id)">
+                <ion-icon name="trash-outline"></ion-icon>
+              </ion-button>
+            </ion-buttons>
+            
+          </ion-item>
+        </ion-list>
+      </ion-card-content>
+    </ion-card>
+    </div>
+
+    
+
+
+
+  </ion-content>

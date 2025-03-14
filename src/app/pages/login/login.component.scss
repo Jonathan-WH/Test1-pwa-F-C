@@ -1,0 +1,139 @@
+ion-content {
+    --ion-background-color: transparent;
+    background: white;
+    display: flex;
+    flex-direction: column;
+}
+
+ion-card {
+    width: 60%;
+    margin-left: auto;
+    margin-right: auto;
+    background-color: rgb(221, 221, 221);
+    margin-bottom: 50px;
+    animation: fadeInCards 0.8s ease-out forwards;
+}
+
+div.logo {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin-top: 40px;
+    margin-bottom: 40px;
+}
+
+div.logo img {
+    width: 40%;
+    height: auto;
+    animation: fadeInCards 0.8s ease-out forwards;
+}
+
+.black {
+    color: black;
+}
+
+ion-card-title {
+    text-align: center;
+}
+
+ion-item {
+   background-color: white!important;
+}
+
+ion-item.first {
+    border-radius: 10px 10px 0 0;
+}
+
+ion-item.last {
+    border-radius: 0 0 10px 10px;
+    margin-bottom: 20px;
+}
+
+ion-button {
+    width: 50%;
+    margin: 10px 0;
+    font-size: 1rem;
+    --border-radius: 8px;
+    --color: white;
+    --background: #000000;
+    --background-hover: #3a3a3a;
+    --background-activated: #191919;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+ion-text.account-button {
+    text-align: center;
+    cursor: pointer;
+}
+
+div.account-button-container {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+ion-text p {
+    background-color: white;
+    margin-bottom: 0px!important;
+    padding-left: 10px;
+}
+
+ion-text.error-login p {
+    padding: 5px;
+    border-radius: 5px;
+    box-shadow: 0 0 5px 0 rgba(0, 0, 0, 0.2);
+    margin: 5px;
+}
+
+p.forgot-password {
+    text-align: center;
+    cursor: pointer;
+    font-size: 12px;
+}
+
+p.forgot-password:hover {
+    text-decoration: underline;
+}
+
+p{
+    margin-top: 0;
+    margin-bottom: 0;
+}
+
+p.forgot-password {
+    margin-bottom: 10px;
+    margin-top: 20px;
+}
+
+div.reset-mail-button-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 5px
+
+}
+
+.reset-item {
+border-radius: 5px;
+}
+
+@keyframes fadeInCards {
+    from {
+      opacity: 0;
+      transform: translateY(10px); /* Apparition avec légère montée */
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+@media (max-width: 768px) {
+    ion-card {
+        width: 90%;
+    }
+
+    div.logo img {
+        width: 80%;
+    }
+}

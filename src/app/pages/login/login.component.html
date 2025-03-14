@@ -1,0 +1,75 @@
+<ion-content class="ion-padding">
+  <div class="logo">
+    <img (click)="navigateTo('')" src="/assets/fc.svg" alt="">
+  </div>
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title class="black roboto-condensed-extrabold">Connexion</ion-card-title>
+    </ion-card-header>
+
+    <ion-card-content>
+      <form [formGroup]="loginForm" (ngSubmit)="onLogin()">
+        
+        <!-- Email -->
+        <ion-item class="first" lines="none">
+          <ion-label position="floating" class="roboto-condensed-medium">Email:</ion-label>
+          <ion-input [clearInput]="true" type="email" formControlName="email" 
+                     (keydown)="blockSpace($event)" (paste)="removeSpacesOnPaste($event, 'email')"></ion-input>
+        </ion-item>
+        <ion-text color="danger" *ngIf="email.invalid && email.touched">
+          <p *ngIf="email.errors?.['required']">L'email est requis.</p>
+          <p *ngIf="email.errors?.['email']">Format d'email invalide.</p>
+        </ion-text>
+
+        <!-- Password -->
+        <ion-item class="last" lines="none">
+          <ion-label position="floating" class="roboto-condensed-medium">Mot de passe:</ion-label>
+          <ion-input [clearInput]="true" type="password" formControlName="password" 
+                     (keydown)="blockSpace($event)" (paste)="removeSpacesOnPaste($event, 'password')">
+            <ion-input-password-toggle slot="end" color="dark"></ion-input-password-toggle>
+          </ion-input>
+        </ion-item>
+        <ion-text color="danger" *ngIf="password.invalid && password.touched">
+          <p *ngIf="password.errors?.['required']">Le mot de passe est requis.</p>
+        </ion-text>
+
+        <!-- Submit Button -->
+        <ion-button expand="block" type="submit" [disabled]="loginForm.invalid" class="roboto-condensed-bold">
+          Se connecter
+        </ion-button>
+
+        <ion-text color="danger" *ngIf="errorMessage" class="error-login">
+          <p>{{ errorMessage }}</p>
+        </ion-text>
+
+        <div class="account-button-container">
+          <ion-text (click)="navigateTo('/register')" class="account-button">Créer un compte</ion-text>
+        </div>
+
+      </form>
+
+      <!-- Mot de passe oublié -->
+    <p class="forgot-password" (click)="toggleResetPassword()">
+      Mot de passe oublié?
+    </p>
+
+    <!-- Champ de réinitialisation du mot de passe (Affiché uniquement si showResetPassword = true) -->
+    <div *ngIf="showResetPassword" class="reset-password-container">
+      <ion-item class="reset-item" lines="none">
+        <ion-label position="floating">Mail:</ion-label>
+        <ion-input appNoSpace type="email" [(ngModel)]="resetEmail"></ion-input>
+      </ion-item>
+      <div class="reset-mail-button-container">
+ <ion-button  class="reset-mail-button" (click)="sendResetPasswordEmail()">Envoyé</ion-button>
+      </div>
+     
+      <ion-text color="success" *ngIf="resetSuccessMessage">
+        {{ resetSuccessMessage }}
+      </ion-text>
+      <ion-text color="danger" *ngIf="resetErrorMessage">
+        {{ resetErrorMessage }}
+      </ion-text>
+    </div>
+    </ion-card-content>
+  </ion-card>
+</ion-content>

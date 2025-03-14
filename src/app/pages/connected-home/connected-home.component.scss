@@ -1,0 +1,182 @@
+ion-content {
+    --ion-background-color: transparent;
+    background: white;
+    display: flex;
+    flex-direction: column;
+}
+
+.grey-background ion-toolbar {
+    --ion-background-color: transparent;
+    --background: rgb(157, 157, 157)!important;
+}
+
+ion-menu-button {
+    color: black;
+}
+  
+  ion-card {
+    width: 95%;
+    margin: 15px auto;
+    background-color: rgb(221, 221, 221);
+    height: fit-content;
+  }
+  
+  div.header-card {
+    width: 100%;
+    display: flex;
+    justify-content: space-evenly;
+  }
+
+  div.header-card ion-card {
+    width: 45%;
+    height: fit-content;
+  }
+
+  
+  
+  @keyframes fadeInCards {
+    from {
+      opacity: 0;
+      transform: translateY(10px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  .fade-in {
+    animation: fadeInCards 0.8s ease-in-out;
+  }
+
+  .white {
+    background-color: white;
+  }
+
+  .first {
+    border-radius: 10px 10px 0 0;
+  }
+
+  .last {
+    border-radius: 0 0 10px 10px;
+    margin-bottom: 20px;
+  }
+
+  .no-border {
+    --border-width: 0!important;
+  }
+
+  ion-button.add-idea {
+    font-size: 1rem;
+    --border-radius: 8px;
+    --background: #000000;
+    --background-hover: #3a3a3a;
+    --background-activated: #191919;
+    width: 50%;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+
+
+
+  .clock-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    margin-top: 10px;
+  }
+  
+  .clock {
+    width: 90px;
+    height: 90px;
+    border-radius: 50%;
+    background: radial-gradient(circle, #f0f0f0, #dcdcdc);
+    box-shadow: inset 2px 2px 5px rgba(0, 0, 0, 0.2), 2px 2px 5px rgba(255, 255, 255, 0.7);
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 4px solid #222;
+  }
+  
+  /* Aiguilles */
+  .hand {
+    position: absolute;
+    transform-origin: 50% 100%;
+    transition: transform 0.5s linear;
+    border-radius: 5px;
+}
+  
+  /* Aiguille des heures */
+  .hour-hand {
+    width: 5px;
+    height: 30px;
+    background: #333;
+    bottom: 50%;
+    left: 50%;
+    transform-origin: center 90%; 
+  }
+  
+  /* Aiguille des minutes */
+  .minute-hand {
+    width: 3px;
+    height: 40px;
+    background: #222;
+    bottom: 50%;
+    left: 50%;
+    transform-origin: center 95%; 
+  }
+  
+  /* Aiguille des secondes */
+  .second-hand {
+    width: 2px;
+    height: 45px;
+    background: red;
+    bottom: 50%;
+    left: 50%;
+    transform-origin: center 97%; 
+  }
+
+  @media (max-width: 768px) {
+    .clock {
+      width: 70px;
+      height: 70px;
+    }
+  
+    .hand {
+      width: 2px;
+    }
+  
+    .hour-hand {
+      height: 20px;
+    }
+  
+    .minute-hand {
+      height: 30px;
+    }
+  
+    .second-hand {
+      height: 35px;
+    }
+
+    div.header-card {
+        flex-direction: column;
+    }
+
+    div.header-card ion-card {
+        width: 95%;
+      }
+  }
+
+  @media (min-width: 769px) {
+    div.container-idea {
+        display: flex;
+        justify-content: space-evenly;
+    }
+
+    div.container-idea ion-card {
+        width: 45%
+    }
+  } 

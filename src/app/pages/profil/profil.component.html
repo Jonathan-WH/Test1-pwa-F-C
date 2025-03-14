@@ -1,0 +1,71 @@
+<ion-header class="grey-background" *ngIf="isAuthenticated$ | async">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button contentId="main-content" menu="menuId" class="black"></ion-menu-button>
+    </ion-buttons>
+    <ion-title class="roboto-condensed-medium">Profil</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+ 
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title class="black roboto-condensed-extrabold">
+        Modifier les infos du profil
+      </ion-card-title>
+    </ion-card-header>
+
+    <ion-card-content>
+      <form [formGroup]="profileForm" (ngSubmit)="onSubmit()">
+        
+        <!-- Email -->
+        <ion-item class="first" lines="none">
+          <ion-label position="floating" class="roboto-condensed-medium">Email:</ion-label>
+          <ion-input type="email" formControlName="email"></ion-input>
+          <ion-text color="danger" *ngIf="profileForm.get('email')?.invalid && profileForm.get('email')?.touched">
+            <p>Un email valide est requis.</p>
+          </ion-text>
+        </ion-item>
+
+        <!-- Username -->
+        <ion-item lines="none">
+          <ion-label position="floating" class="roboto-condensed-medium">Nom d'utilisateur:</ion-label>
+          <ion-input type="text" formControlName="username"></ion-input>
+          <ion-text color="danger" *ngIf="profileForm.get('username')?.invalid && profileForm.get('username')?.touched">
+            <p *ngIf="profileForm.get('username')?.errors?.['required']">Le nom d'utilisateur est obligatoire.</p>
+            <p *ngIf="profileForm.get('username')?.errors?.['minlength']">Au moins 8 caractères.</p>
+          </ion-text>
+        </ion-item>
+
+        <!-- Password -->
+        <ion-item lines="none">
+          <ion-label position="floating" class="roboto-condensed-medium">Mot de passe:</ion-label>
+          <ion-input type="password" formControlName="password">
+            <ion-input-password-toggle slot="end" color="dark"></ion-input-password-toggle>
+          </ion-input>
+          <ion-text color="danger" *ngIf="profileForm.controls['password'].invalid && profileForm.controls['password'].touched">
+            <p *ngIf="profileForm.controls['password'].errors?.['minlength']">Au moins 8 caractères.</p>
+            <p *ngIf="profileForm.controls['password'].errors?.['pattern']">Doit contenir une majuscule, un chiffre, un caractère spécial.</p>
+          </ion-text>
+        </ion-item>
+
+        <!-- Confirm Password -->
+        <ion-item class="last" lines="none">
+          <ion-label position="floating" class="roboto-condensed-medium">Confirmer le mot de passe:</ion-label>
+          <ion-input type="password" formControlName="confirmPassword">
+            <ion-input-password-toggle slot="end" color="dark"></ion-input-password-toggle>
+          </ion-input>
+          <ion-text color="danger" *ngIf="profileForm.hasError('passwordMismatch')">
+            <p>Les mots de passe ne correspondent pas.</p>
+          </ion-text>
+        </ion-item>
+
+        <!-- Submit Button -->
+        <ion-button class="roboto-condensed-medium" expand="block" type="submit" [disabled]="profileForm.invalid">
+          Mettre à jour
+        </ion-button>
+      </form>
+    </ion-card-content>
+  </ion-card>
+</ion-content>

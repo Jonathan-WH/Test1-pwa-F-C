@@ -1,0 +1,27 @@
+<ion-content class="ion-padding">
+  <div class="logo">
+    <img src="/assets/fc.svg" alt="">
+  </div>
+
+  <ion-card class="fade-in">
+    <ion-card-header>
+      <ion-card-title class="black roboto-condensed-extrabold">Bienvenue</ion-card-title>
+    </ion-card-header>
+
+    <ion-card-content>
+      <p class="subtitle roboto-condensed-medium">
+        Bienvenue dans le nouveau Dashboard de <strong>Frédérique Constant</strong>. 
+        Gérez facilement votre compte !
+      </p>
+
+      <div class="button-container">
+        <ion-button class="roboto-condensed-bold" expand="block" (click)="navigateTo('/register')">
+          S'inscrire
+        </ion-button>
+        <ion-button class="roboto-condensed-bold" expand="block"  (click)="navigateTo('/login')">
+          Se connecter
+        </ion-button>
+      </div>
+    </ion-card-content>
+  </ion-card>
+</ion-content>
